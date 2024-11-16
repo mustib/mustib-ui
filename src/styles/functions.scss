@@ -1,0 +1,3 @@
+@function rem-size($rem) {
+  @return calc(var(--mu-base-rem) * #{$rem});
+}

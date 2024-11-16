@@ -1,0 +1,17 @@
+@mixin reset-host {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :host {
+    display: block;
+    color: var(--mu-primary-900);
+    font-size: #{rem-size(1.6)};
+  }
+
+  :host(:focus) {
+    outline: 1px dashed var(--mu-primary-900);
+  }
+}

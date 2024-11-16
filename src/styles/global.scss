@@ -1,0 +1,113 @@
+$shades-length: 9;
+$colors: (
+  primary: 240,
+  secondary: 270,
+);
+
+/**
+ * @param {string} $theme light | dark
+ * @param {boolean} $include-hue
+ */
+@mixin generate-shades($theme, $include-hue: true) {
+  $lightness-start: 0%;
+  $lightness-end: 0%;
+  $saturation: 100%;
+
+  @if $theme == dark {
+    $lightness-start: 10%;
+    $lightness-end: 100%;
+  } @else if $theme == light {
+    $lightness-start: 100%;
+    $lightness-end: 10%;
+  } @else {
+    @error "Unknown theme: #{$theme}";
+  }
+
+  $subtract: calc(($lightness-start - $lightness-end) / $shades-length);
+
+  @each $color, $hue in $colors {
+    @if $include-hue {
+      --mu-#{$color}-hue: #{$hue};
+    }
+    --mu-#{$color}-saturation: #{$saturation};
+    @for $i from 1 through $shades-length {
+      $lightness: $lightness-start + $subtract - ($subtract * $i);
+      --mu-#{$color}-#{$i * 100}: hsl(var(--mu-#{$color}-hue), var(--mu-#{$color}-saturation), #{$lightness});
+    }
+  }
+}
+
+:where(:root) {
+  --mu-base-rem: 0.625rem;
+
+  @include generate-shades(light);
+
+  @media (prefers-color-scheme: dark) {
+    @include generate-shades(dark);
+  }
+}
+
+:where([theme='light'], [data-theme='light']) {
+  @include generate-shades(light, $include-hue: false);
+}
+
+:where([theme='dark'], [data-theme='dark']) {
+  @include generate-shades(dark, $include-hue: false);
+}
+
+@function generate-shades($color, $smooth: false) {
+  $color-range: calc(100% / $shades-length);
+  $colors: ();
+  $range: 0%;
+  @for $i from 1 through $shades-length {
+    $shade: (var(--mu-#{$color}-#{$i * 100}));
+    @if ($smooth == false) {
+      $next-range: $range + $color-range;
+      $current-range: ($range $next-range);
+      $shade: (var(--mu-#{$color}-#{$i * 100}) #{$current-range});
+      $range: $next-range;
+    }
+    $colors: append($colors, $shade, $separator: comma);
+  }
+  @return linear-gradient(to right, $colors);
+}
+
+@each $color, $value in $colors {
+  .mu-#{$color}-shades {
+    display: grid;
+    padding: 10px;
+    outline: 1.5px dashed black;
+    background-color: hsl(0deg 0% 0% / 50%);
+    width: 100%;
+    margin-block: 20px;
+    box-sizing: border-box;
+
+    &::after {
+      content: '';
+      box-sizing: inherit;
+      aspect-ratio: calc($shades-length / 1);
+      background-image: generate-shades($color);
+      outline: inherit;
+    }
+
+    &::before {
+      content: 'mu #{$color} colors';
+      display: grid;
+      outline: inherit;
+      place-content: center;
+      place-items: center;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      box-sizing: inherit;
+      padding: 10px;
+      min-height: min-content;
+      background-image: generate-shades($color, true);
+    }
+  }
+}
+
+[mu-no-scroll] {
+  overflow: hidden !important;
+  margin-inline-end: var(--mu-no-scroll-margin-inline-end, 15px) !important;
+}

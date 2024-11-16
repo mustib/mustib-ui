@@ -1,14 +1,57 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
+<html dir="ltr" lang="en" theme="dark">
 
-    <script type="module" src="/build/mustib-ui.esm.js"></script>
-    <script nomodule src="/build/mustib-ui.js"></script>
-  </head>
-  <body>
-    <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      font-size: 62.5%;
+      --mu-base-rem: 1rem;
+    }
+
+    :root[theme="dark"] {
+
+      background-color: var(--mu-primary-100);
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="/build/mustib-ui.css">
+  </link>
+  <script type="module" src="/build/mustib-ui.esm.js"></script>
+  <script nomodule src="/build/mustib-ui.js"></script>
+
+</head>
+
+<body>
+  <details style="color: var(--mu-primary-900);font-size: 1.6rem;margin: 1rem; text-align: center;">
+    <summary style="display: grid; gap: .5rem;justify-items: center;">
+      <label style="display: inline-flex; align-items: center;gap: .2rem;">
+        <input type="checkbox" id="theme-switch">
+        <span>switch theme</span>
+      </label>
+      <span style="cursor: pointer;">View Theme colors ▼</span>
+    </summary>
+    <div>
+      <div class="mu-primary-shades"></div>
+      <div class="mu-secondary-shades"></div>
+    </div>
+  </details>
+
+</body>
+<script>
+  const themeSwitch = document.getElementById('theme-switch');
+  if (document.documentElement.getAttribute('theme') === 'dark') {
+    themeSwitch.checked = true;
+  }
+
+  themeSwitch.addEventListener('change', () => {
+    document.documentElement.setAttribute('theme', themeSwitch.checked ? 'dark' : 'light');
+  });
+</script>
+
 </html>
