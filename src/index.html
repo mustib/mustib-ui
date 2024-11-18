@@ -16,7 +16,6 @@
     }
 
     :root[theme="dark"] {
-
       background-color: var(--mu-primary-100);
     }
   </style>
@@ -41,6 +40,20 @@
       <div class="mu-secondary-shades"></div>
     </div>
   </details>
+
+  <div style="outline: 1px dashed var(--mu-primary-900); padding: 1rem;">
+    <h3 style="color: var(--mu-primary-900); font-size: 2rem; text-align: center;">Mu Select Item</h3>
+    <div style="display: grid; gap: 1rem;">
+      <mu-select-item selected value="selected"></mu-select-item>
+      <mu-select-item active value="active"></mu-select-item>
+      <mu-select-item selected active value="selected & active"></mu-select-item>
+      <mu-select-item checkbox value="checkbox normal"></mu-select-item>
+      <mu-select-item checkbox="before" value="checkbox before"></mu-select-item>
+      <mu-select-item checkbox="before" selected value="checkbox before selected"></mu-select-item>
+      <mu-select-item checkbox="after" value="checkbox after"></mu-select-item>
+      <mu-select-item checkbox="after" selected value="checkbox after selected"></mu-select-item>
+    </div>
+  </div>
 
 </body>
 <script>
