@@ -1,0 +1,44 @@
+@include reset-host;
+
+:host {
+  position: relative;
+  user-select: none;
+  --items-background-color: var(--mu-primary-100);
+  --items-border-radius: #{rem-size(1.2)};
+  --items-border: #{rem-size(0.4)} solid var(--mu-primary-200);
+  --items-margin: #{rem-size(1)};
+}
+
+:host(:not([opened])) #items-container {
+  display: none;
+}
+
+// :host([items-y-axis='top']) {
+//   #items-container {
+//     bottom: 100%;
+//     top: unset;
+//   }
+// }
+// :host([items-y-axis='bottom']) {
+//   #items-container {
+//     top: 100%;
+//   }
+// }
+
+#items-container {
+  z-index: 1;
+  position: var(--items-position);
+  top: var(--items-top);
+  bottom: var(--items-bottom);
+  left: var(--items-left);
+  right: var(--items-right);
+  margin-block: var(--items-margin);
+  transform-origin: var(--items-transform-origin);
+  overflow: auto;
+  max-height: min(calc(var(--items-max-height, 75vh) - (var(--items-margin) * 2)), 75vh);
+  background-color: var(--items-background-color);
+  border: var(--items-border);
+  border-radius: var(--mu-items-border-radius);
+  padding: var(--items-margin);
+  scrollbar-width: thin;
+}

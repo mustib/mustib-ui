@@ -11,6 +11,7 @@
     }
 
     :root {
+      color: var(--mu-primary-900);
       font-size: 62.5%;
       --mu-base-rem: 1rem;
     }
@@ -19,28 +20,57 @@
       background-color: var(--mu-primary-100);
     }
 
-
-    :has(mu-trigger-delay[open-status='closed']) mu-trigger::before,
-    :has(mu-trigger-delay[open-status='closing']) mu-trigger::before {
-      content: 'Open ';
+    details {
+      margin: 1rem;
+      text-align: center;
+      font-size: 1.6rem;
     }
 
-    :has(mu-trigger-delay[open-status='opened']) mu-trigger::before,
-    :has(mu-trigger-delay[open-status='opening']) mu-trigger::before {
-      content: 'Close ';
-    }
+    .standalone-items {
+      outline: 1px solid var(--mu-primary-900);
+      padding: 1rem;
+      margin: 1rem;
 
-    mu-trigger-delay {
-      transition: all .3s ease-in-out;
-      transform-origin: top;
-    }
+      mu-select-items {
+        transition: all 0.3s ease-in-out;
+        scale: 1 0;
+        transform-origin: top;
+      }
 
-    mu-trigger-delay:not([open-status='closed']) mu-select-items {
-      display: grid;
-    }
+      &[open-status='closed'],
+      &[open-status='closing'] {
+        mu-trigger::before {
+          content: 'Open';
+        }
 
-    mu-trigger-delay:not([open-status='opened']) {
-      scale: 1 0;
+        mu-trigger::after {
+          content: '▲';
+        }
+      }
+
+      &[open-status='closed'] {
+
+        mu-select-items {
+          display: none;
+        }
+      }
+
+      &[open-status='opened'],
+      &[open-status='opening'] {
+        mu-trigger::before {
+          content: 'Close';
+        }
+
+        mu-trigger::after {
+          content: '▼';
+        }
+      }
+
+      &[open-status='opened'] {
+        mu-select-items {
+          scale: 1;
+        }
+      }
     }
   </style>
   <link rel="stylesheet" type="text/css" href="/build/mustib-ui.css">
@@ -51,7 +81,7 @@
 </head>
 
 <body>
-  <details style="color: var(--mu-primary-900);font-size: 1.6rem;margin: 1rem; text-align: center;">
+  <details>
     <summary style="display: grid; gap: .5rem;justify-items: center;">
       <label style="display: inline-flex; align-items: center;gap: .2rem;">
         <input type="checkbox" id="theme-switch">
@@ -65,18 +95,62 @@
     </div>
   </details>
 
-  <div style="outline: 1px dashed var(--mu-primary-900); padding: 1rem; transition: all .3s;">
-    <mu-trigger style="color: var(--mu-primary-900); font-size: 2rem; text-align: center;">Mu Select
-      Items</mu-trigger>
-    <mu-trigger-delay await-closing-timeout="300ms">
-      <mu-select-items multiple>
-        <mu-select-item value="item 1"></mu-select-item>
-        <mu-select-item value="item 2"></mu-select-item>
-        <mu-select-item value="item 3"></mu-select-item>
-        <mu-select-item value="item 4"></mu-select-item>
-      </mu-select-items>
+  <mu-select open-behavior="dynamic">
+    <mu-select-items multiple>
+      <mu-select-item value="item 1"></mu-select-item>
+      <mu-select-item value="item 2"></mu-select-item>
+      <mu-select-item value="item 3"></mu-select-item>
+      <mu-select-item value="item 4"></mu-select-item>
+      <mu-select-item value="item 5"></mu-select-item>
+      <mu-select-item value="item 6"></mu-select-item>
+      <mu-select-item value="item 7"></mu-select-item>
+      <mu-select-item value="item 8"></mu-select-item>
+      <mu-select-item value="item 9"></mu-select-item>
+      <mu-select-item value="item 10"></mu-select-item>
+      <mu-select-item value="item 11"></mu-select-item>
+      <mu-select-item value="item 12"></mu-select-item>
+      <mu-select-item value="item 13"></mu-select-item>
+      <mu-select-item value="item 14"></mu-select-item>
+      <mu-select-item value="item 15"></mu-select-item>
+      <mu-select-item value="item 16"></mu-select-item>
+      <mu-select-item value="item 17"></mu-select-item>
+      <mu-select-item value="item 18"></mu-select-item>
+      <mu-select-item value="item 19"></mu-select-item>
+      <mu-select-item value="item 20"></mu-select-item>
+    </mu-select-items>
+  </mu-select>
+
+  <details>
+    <summary>Standalone mu select items</summary>
+    <mu-trigger-delay class="standalone-items" child-selector="mu-select-items" await-closing-timeout="300ms">
+      <mu-trigger for=".standalone-items" style="color: var(--mu-primary-900); font-size: 2rem; text-align: center;">
+        <span>Standalone Mu Select Items</span>
+        </div>
+
+        <mu-select-items multiple>
+          <mu-select-item value="item 1"></mu-select-item>
+          <mu-select-item value="item 2"></mu-select-item>
+          <mu-select-item value="item 3"></mu-select-item>
+          <mu-select-item value="item 4"></mu-select-item>
+          <mu-select-item value="item 5"></mu-select-item>
+          <mu-select-item value="item 6"></mu-select-item>
+          <mu-select-item value="item 7"></mu-select-item>
+          <mu-select-item value="item 8"></mu-select-item>
+          <mu-select-item value="item 9"></mu-select-item>
+          <mu-select-item value="item 10"></mu-select-item>
+          <mu-select-item value="item 11"></mu-select-item>
+          <mu-select-item value="item 12"></mu-select-item>
+          <mu-select-item value="item 13"></mu-select-item>
+          <mu-select-item value="item 14"></mu-select-item>
+          <mu-select-item value="item 15"></mu-select-item>
+          <mu-select-item value="item 16"></mu-select-item>
+          <mu-select-item value="item 17"></mu-select-item>
+          <mu-select-item value="item 18"></mu-select-item>
+          <mu-select-item value="item 19"></mu-select-item>
+          <mu-select-item value="item 20"></mu-select-item>
+        </mu-select-items>
     </mu-trigger-delay>
-  </div>
+  </details>
 
 </body>
 <script>

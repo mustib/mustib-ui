@@ -1,8 +1,11 @@
 @mixin reset-host {
   * {
-    margin: 0;
-    padding: 0;
+    :not(.mu-hydrated) {
+      margin: 0;
+      padding: 0;
+    }
     box-sizing: border-box;
+    font-size: inherit;
   }
 
   :host {

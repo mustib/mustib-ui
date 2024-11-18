@@ -1,6 +1,4 @@
-function getScrollbarWidth() {
-  return window.innerWidth - document.documentElement.clientWidth;
-}
+import { getScrollbarWidth } from '@mustib/utils/dist/browser';
 
 export function disablePageScroll() {
   if (document.body.hasAttribute('mu-no-scroll')) return;

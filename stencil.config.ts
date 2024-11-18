@@ -17,20 +17,19 @@ export const config: Config = {
 
   outputTargets: [
     {
+      type: 'dist-custom-elements',
+      customElementsExportBehavior: 'auto-define-custom-elements',
+      externalRuntime: false,
+    },
+
+    {
       type: 'dist',
-      isPrimaryPackageOutputTarget: true,
     },
 
     reactOutputTarget({
       outDir: './dist/react',
       stencilPackageName: '../..',
     }),
-
-    {
-      type: 'dist-custom-elements',
-      customElementsExportBehavior: 'auto-define-custom-elements',
-      externalRuntime: false,
-    },
 
     {
       type: 'www',

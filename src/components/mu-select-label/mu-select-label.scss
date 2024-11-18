@@ -1,0 +1,32 @@
+@include reset-host;
+
+:host {
+  font-weight: 900;
+  cursor: pointer;
+  padding: rem-size(1.2) rem-size(1.6);
+  background-color: var(--mu-primary-200);
+  border-radius: var(--mu-select-border-radius, rem-size(1.2));
+}
+
+:host([opened]) .default-arrow {
+  scale: 1 -1;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: rem-size(1);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  text-wrap-mode: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.default-arrow {
+  color: var(--arrow-color, currentColor);
+  transition: all 0.3s;
+}

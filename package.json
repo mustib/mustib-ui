@@ -13,11 +13,14 @@
     "url": "https://github.com/ionic-team/stencil-component-starter.git"
   },
   "files": [
-    "dist/",
-    "loader/"
+    "dist/"
   ],
+  "exports": {
+    "./*": "./dist/components/*",
+    "./react": "./dist/react/index.ts"
+  },
   "scripts": {
-    "build": "stencil build",
+    "build": "stencil build && node ./afterBuild.js",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
@@ -35,6 +38,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@mustib/utils": "^1.0.4"
+    "@mustib/utils": "^1.0.5"
   }
 }
