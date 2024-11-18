@@ -1,0 +1,13 @@
+@include reset-host;
+
+:host {
+  display: grid;
+  gap: rem-size(1.2);
+}
+
+:host([disabled]) {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+  pointer-events: none;
+}

@@ -18,6 +18,30 @@
     :root[theme="dark"] {
       background-color: var(--mu-primary-100);
     }
+
+
+    :has(mu-trigger-delay[open-status='closed']) mu-trigger::before,
+    :has(mu-trigger-delay[open-status='closing']) mu-trigger::before {
+      content: 'Open ';
+    }
+
+    :has(mu-trigger-delay[open-status='opened']) mu-trigger::before,
+    :has(mu-trigger-delay[open-status='opening']) mu-trigger::before {
+      content: 'Close ';
+    }
+
+    mu-trigger-delay {
+      transition: all .3s ease-in-out;
+      transform-origin: top;
+    }
+
+    mu-trigger-delay:not([open-status='closed']) mu-select-items {
+      display: grid;
+    }
+
+    mu-trigger-delay:not([open-status='opened']) {
+      scale: 1 0;
+    }
   </style>
   <link rel="stylesheet" type="text/css" href="/build/mustib-ui.css">
   </link>
@@ -41,18 +65,17 @@
     </div>
   </details>
 
-  <div style="outline: 1px dashed var(--mu-primary-900); padding: 1rem;">
-    <h3 style="color: var(--mu-primary-900); font-size: 2rem; text-align: center;">Mu Select Item</h3>
-    <div style="display: grid; gap: 1rem;">
-      <mu-select-item selected value="selected"></mu-select-item>
-      <mu-select-item active value="active"></mu-select-item>
-      <mu-select-item selected active value="selected & active"></mu-select-item>
-      <mu-select-item checkbox value="checkbox normal"></mu-select-item>
-      <mu-select-item checkbox="before" value="checkbox before"></mu-select-item>
-      <mu-select-item checkbox="before" selected value="checkbox before selected"></mu-select-item>
-      <mu-select-item checkbox="after" value="checkbox after"></mu-select-item>
-      <mu-select-item checkbox="after" selected value="checkbox after selected"></mu-select-item>
-    </div>
+  <div style="outline: 1px dashed var(--mu-primary-900); padding: 1rem; transition: all .3s;">
+    <mu-trigger style="color: var(--mu-primary-900); font-size: 2rem; text-align: center;">Mu Select
+      Items</mu-trigger>
+    <mu-trigger-delay await-closing-timeout="300ms">
+      <mu-select-items multiple>
+        <mu-select-item value="item 1"></mu-select-item>
+        <mu-select-item value="item 2"></mu-select-item>
+        <mu-select-item value="item 3"></mu-select-item>
+        <mu-select-item value="item 4"></mu-select-item>
+      </mu-select-items>
+    </mu-trigger-delay>
   </div>
 
 </body>
