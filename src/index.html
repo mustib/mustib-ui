@@ -26,6 +26,10 @@
       font-size: 1.6rem;
     }
 
+    mu-image-input {
+      max-width: 25rem;
+    }
+
     .standalone-items {
       outline: 1px solid var(--mu-primary-900);
       padding: 1rem;
@@ -81,6 +85,7 @@
 </head>
 
 <body>
+
   <details>
     <summary style="display: grid; gap: .5rem;justify-items: center;">
       <label style="display: inline-flex; align-items: center;gap: .2rem;">
@@ -94,6 +99,8 @@
       <div class="mu-secondary-shades"></div>
     </div>
   </details>
+
+  <mu-image-input></mu-image-input>
 
   <mu-select open-behavior="dynamic">
     <mu-select-items multiple>

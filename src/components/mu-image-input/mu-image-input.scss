@@ -1,0 +1,100 @@
+@include reset-host;
+
+:host {
+  --blur: 5px;
+  position: relative;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  margin: auto;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: rem-size(1.2);
+
+  &::before,
+  .buttons {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    overflow: hidden;
+  }
+
+  &::before {
+    content: '';
+    background-color: hsla(0 0% 0% / 0);
+    transition: all 0.3s;
+    backdrop-filter: blur(var(--blur)) invert(0.1);
+  }
+}
+
+:host([empty]) {
+  .image {
+    visibility: hidden;
+  }
+}
+
+:host(:not([empty])) {
+  .buttons {
+    visibility: hidden;
+  }
+
+  &::before,
+  .buttons {
+    z-index: -1;
+  }
+}
+
+:host(:hover) {
+  .buttons {
+    visibility: visible;
+  }
+
+  &::before,
+  .buttons {
+    z-index: 1;
+  }
+}
+
+.buttons {
+  display: grid;
+  place-content: center;
+  place-items: center;
+  grid-template-areas:
+    'upload'
+    'clear';
+  gap: rem-size(1);
+
+  .upload,
+  .clear {
+    all: unset;
+  }
+
+  .defaultContent {
+    padding: rem-size(0.5) rem-size(1);
+    border-radius: 100rem;
+    display: block;
+  }
+
+  .upload {
+    grid-area: upload;
+    .defaultContent {
+      background-color: var(--mu-primary-100);
+      color: var(--mu-primary-900);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+  }
+
+  .clear {
+    grid-area: clear;
+    .defaultContent {
+      background-color: var(--mu-secondary-400);
+      color: var(--mu-secondary-900);
+    }
+  }
+}
+
+.image {
+  max-width: 100%;
+  display: block;
+}
