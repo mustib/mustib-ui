@@ -1,7 +1,7 @@
 {
   "name": "@mustib/ui",
   "version": "0.0.1",
-  "description": "",
+  "description": "A web component library built with Stencil",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -10,10 +10,11 @@
   "unpkg": "dist/mustib-ui/mustib-ui.esm.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ionic-team/stencil-component-starter.git"
+    "url": "https://github.com/mustib/mustib-utils.git"
   },
   "files": [
-    "dist/"
+    "dist/",
+    "package.json"
   ],
   "exports": {
     "./*": "./dist/components/*",
@@ -24,20 +25,21 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
+    "generate": "stencil generate",
+    "prePublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@stencil/core": "^4.7.0",
-    "@stencil/react-output-target": "^0.7.4",
+    "@stencil/core": "^4.23.0",
     "@stencil/sass": "^3.0.12",
     "@types/jest": "^29.5.6",
     "@types/node": "^16.18.11",
     "jest": "^29.7.0",
     "jest-cli": "^29.7.0",
-    "puppeteer": "^21.9.0"
+    "puppeteer": "^23.11.1"
   },
   "license": "MIT",
   "dependencies": {
-    "@mustib/utils": "^1.0.5"
+    "@mustib/utils": "^2.0.0",
+    "@stencil/react-output-target": "^0.8.1"
   }
 }
